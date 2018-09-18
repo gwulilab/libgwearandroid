@@ -26,6 +26,7 @@ Use the following code snippets in your project:
 ### Import Statement
 ```java
 import edu.gwu.seas.gwulilab.libgwearandroid.DatabaseConnection;
+import org.influxdb.dto.Point;
 ```
 
 ### Object Initialisation and Usage
@@ -37,5 +38,22 @@ database = new DatabaseConnection("my-server.url", "influxdb-database-name");
 database.start();
 
 // Code to go in a button or timer or something
-database.addPoint()
+addPoint()
+
+/**
+ * Adds a data point to send to InfluxDB
+ */
+public void addPoint() {
+    try {
+        Point point = Point.measurement("testMeasure")
+                .time(System.currentTimeMillis(), TimeUnit.MILLISECONDS)
+                .tag("region", "us-east-1")
+                .addField("value", 123.0)
+                .build();
+
+        database.addData(point);
+    } catch (Exception e) {
+        Log.e("db", e.toString());
+    }
+}
 ```
