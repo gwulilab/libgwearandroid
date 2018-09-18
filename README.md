@@ -16,6 +16,7 @@ include ':app', ':libgwearandroid'
 For step 3, this should be added:
 ```gradle
 dependencies {
+    implementation 'org.influxdb:influxdb-java:2.10'
     implementation project(":libgwearandroid")
 }
 ```
