@@ -89,22 +89,6 @@ public class DatabaseConnection extends Thread {
         this.sendBufferSize = sendBufferSize;
     }
 
-    /**
-     * Adds a data point to send to InfluxDB
-     */
-    public void addPoint() {
-        try {
-            Point point = Point.measurement("testMeasure")
-                    .time(System.currentTimeMillis(), TimeUnit.MILLISECONDS)
-                    .tag("region", "us-east-1")
-                    .addField("value", 123.0)
-                    .build();
-
-            addData(point);
-        } catch (Exception e) {
-            Log.e("db", e.toString());
-        }
-    }
 
     /**
      * Writes data to InfluxDB as a batch when enough points are collected
