@@ -3,7 +3,11 @@ apply plugin: 'com.android.library'
 android {
     compileSdkVersion 28
 
-
+    repositories {
+        maven {
+            url 'https://maven.google.com'
+        }
+    }
 
     defaultConfig {
         minSdkVersion 26
