@@ -1,9 +1,25 @@
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.1.2'
+    }
+}
+
 apply plugin: 'com.android.library'
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url 'https://jitpack.io' }
+    }
+}
 
 android {
     compileSdkVersion 28
-
-
 
     defaultConfig {
         minSdkVersion 26

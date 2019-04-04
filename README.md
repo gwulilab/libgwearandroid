@@ -1,4 +1,6 @@
 # libgwearandroid
+[![Build Status](https://travis-ci.org/gwulilab/libgwearandroid.svg?branch=master)](https://travis-ci.org/gwulilab/libgwearandroid)
+
 Android-optimised library for connecting sensor-enabling Android apps to our cloud system
 
 # Dependencies
