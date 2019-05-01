@@ -1,6 +1,5 @@
 package edu.gwu.seas.gwulilab.libgwearandroid;
 
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -16,7 +15,7 @@ public class PatientData {
      */
     @SerializedName("timestamp")
     @Expose
-    private List<Integer> timestamp = null;
+    private Integer timestamp;
     @SerializedName("mac")
     @Expose
     private String mac;
@@ -25,7 +24,7 @@ public class PatientData {
     private String sensor;
     @SerializedName("value")
     @Expose
-    private List<Double> value = null;
+    private Double value;
     @SerializedName("metric")
     @Expose
     private String metric;
@@ -43,7 +42,7 @@ public class PatientData {
      * (Required)
      *
      */
-    public List<Integer> getTimestamp() {
+    public Integer getTimestamp() {
         return timestamp;
     }
 
@@ -52,7 +51,7 @@ public class PatientData {
      * (Required)
      *
      */
-    public void setTimestamp(List<Integer> timestamp) {
+    public void setTimestamp(Integer timestamp) {
         this.timestamp = timestamp;
     }
 
@@ -72,11 +71,11 @@ public class PatientData {
         this.sensor = sensor;
     }
 
-    public List<Double> getValue() {
+    public Double getValue() {
         return value;
     }
 
-    public void setValue(List<Double> value) {
+    public void setValue(Double value) {
         this.value = value;
     }
 

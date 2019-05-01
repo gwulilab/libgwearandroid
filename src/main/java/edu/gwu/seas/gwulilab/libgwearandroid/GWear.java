@@ -64,10 +64,10 @@ public class GWear {
     }
 
     public void sendPatientData(int id,
-                                List<Integer> timestamp,
+                                int timestamp,
                                 String mac,
                                 String sensor,
-                                List<Double> value,
+                                double value,
                                 String metric) {
 
         PatientData patientData = new PatientData();
