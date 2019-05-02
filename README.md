@@ -4,21 +4,22 @@
 Android-optimised library for connecting sensor-enabling Android apps to our cloud system
 
 # Dependencies
-- [influxdb-java](https://github.com/influxdata/influxdb-java)
+- None
 
 # Usage
 ## Gradle
-The library (for now) must be cloned and then imported to your Android project. Instructions to that can be found [here](https://developer.android.com/studio/projects/android-library#AddDependency).
+The library (for now) must be cloned and then imported to your Android project. Instructions to that can be found [here](https://developer.android.com/studio/projects/android-library#AddDependency) under "Add your library as a dependency".
 
-In the case of step 2, the following line should be added: 
+First, download the project either through git or extract it from the zip file. As with step 1, click File > New > Import Module then select where you downloaded libgwearandroid.
+
+For step 2, the following line should be added to `settings.gradle` (should be done automatically): 
 ```gradle
 include ':app', ':libgwearandroid'
 ```
 
-For step 3, this should be added:
+For step 3, this should be added to your app's `build.gradle` dependencies:
 ```gradle
 dependencies {
-    implementation 'org.influxdb:influxdb-java:2.10'
     implementation project(":libgwearandroid")
 }
 ```
@@ -28,35 +29,36 @@ Use the following code snippets in your project:
 
 ### Import Statement
 ```java
-import edu.gwu.seas.gwulilab.libgwearandroid.DatabaseConnection;
-import org.influxdb.dto.Point;
+import edu.gwu.seas.gwulilab.libgwearandroid.GWear;
 ```
 
 ### Object Initialisation and Usage
 ```java
-private DatabaseConnection database;
+private GWear gwear;
+
+// Some AWS settings
+private final String baseUrl = "https://your.url.here.found.in.Amazon.RDS";
+private final String apiKey = "x-api-key: YouAPIGatewayKeyHere";
 
 // onCreate code snippet
-database = new DatabaseConnection("my-server.url", "influxdb-database-name");
-database.start();
+protected void onCreate(Bundle savedInstanceState) {
+    gwear = new GWear(baseUrl, apiKey);
+}
 
-// Code to go in a button or timer or something
-addPoint()
-
-/**
- * Adds a data point to send to InfluxDB
- */
+// Usage in a function where you want to send data
 public void addPoint() {
     try {
-        Point point = Point.measurement("testMeasure")
-                .time(System.currentTimeMillis(), TimeUnit.MILLISECONDS)
-                .tag("region", "us-east-1")
-                .addField("value", 123.0)
-                .build();
+        long epochTime = System.currentTimeMillis() / 1000;
 
-        database.addData(point);
+        gwear.sendPatientData(1, (int)epochTime, "abc123",
+                "test_sensor", 4.7, "test_metric");
     } catch (Exception e) {
         Log.e("db", e.toString());
     }
 }
 ```
+
+### Android Manifest
+You also need to add the following to your AndroidManifest.xml:
+
+`<uses-permission android:name="android.permission.INTERNET" />`
