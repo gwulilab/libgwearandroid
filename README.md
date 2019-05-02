@@ -57,3 +57,8 @@ public void addPoint() {
     }
 }
 ```
+
+### Android Manifest
+You also need to add the following to your AndroidManifest.xml:
+
+`<uses-permission android:name="android.permission.INTERNET" />`
